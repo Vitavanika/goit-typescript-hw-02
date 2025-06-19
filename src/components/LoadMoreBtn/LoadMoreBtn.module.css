@@ -1,0 +1,27 @@
+.loadMoreButton {
+  padding: 12px 25px;
+  background-color: #26A69A;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: block;
+  margin: 20px auto;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.loadMoreButton:hover:not(:disabled) {
+  background-color: #00897B;
+  transform: translateY(-2px);
+}
+
+.loadMoreButton:disabled {
+  background-color: #A7C4C0;
+  color: #E0F2F1;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: translateY(0);
+}

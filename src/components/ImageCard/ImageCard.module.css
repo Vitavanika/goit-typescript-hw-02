@@ -1,0 +1,18 @@
+/* src/components/ImageCard/ImageCard.module.css */
+.card {
+  cursor: pointer;
+  height: 240px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #B2DFDB;
+  border-radius: 8px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease-in-out;
+}
