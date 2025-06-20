@@ -8,21 +8,24 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
 import styles from "./App.module.css";
+import { UnsplashImage } from "./types";
 
-const ACCESS_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
+const ACCESS_KEY: string = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
 axios.defaults.baseURL = "https://api.unsplash.com";
 
-function App() {
-  const [images, setImages] = useState([]);
+export default function App() {
+  const [images, setImages] = useState<UnsplashImage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<UnsplashImage | null>(
+    null
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const fetchImages = async (searchQuery, pageNum) => {
+  const fetchImages = async ( searchQuery: string, pageNum: number ): Promise<void> => {
     if (!searchQuery.trim()) {
       setImages([]);
       setTotalPages(0);
@@ -73,7 +76,7 @@ function App() {
     }
   }, [query, page]);
 
-  const handleSearchSubmit = (newQuery) => {
+  const handleSearchSubmit = (newQuery: string) => {
     if (query === newQuery && page === 1 && images.length > 0) return;
     setQuery(newQuery);
     setPage(1);
@@ -99,7 +102,7 @@ function App() {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const openModal = (imageData) => {
+  const openModal = (imageData: UnsplashImage) => {
     setSelectedImage(imageData);
     setIsModalOpen(true);
   };
@@ -146,5 +149,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

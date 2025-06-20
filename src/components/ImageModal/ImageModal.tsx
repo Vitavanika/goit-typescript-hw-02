@@ -1,5 +1,12 @@
 import Modal from "react-modal";
+import { UnsplashImage } from "../../types";
 import css from "./ImageModal.module.css";
+
+interface ImageModalProps {
+  isOpen: boolean;
+  onRequestClose: () => void;
+  imageData: UnsplashImage;
+}
 
 const customStyles = {
   content: {
@@ -23,10 +30,10 @@ const customStyles = {
   base: {
     borderRadius: "8px",
     boxShadow: "0 5px 15px rgba(0, 77, 64, 0.3)",
-  },  
+  },
 };
 
-function ImageModal({ isOpen, onRequestClose, imageData }) {
+export default function ImageModal({ isOpen, onRequestClose, imageData }: ImageModalProps) {
   if (!imageData) {
     return null;
   }
@@ -49,11 +56,11 @@ function ImageModal({ isOpen, onRequestClose, imageData }) {
           <p>Autor: {imageData.user.name}</p>
           <p>Likes: {imageData.likes}</p>
           <p>Upload date: {imageData.created_at.split("T")[0]} </p>
-          <p>Size: {imageData.width}x{imageData.height}</p>
+          <p>
+            Size: {imageData.width}x{imageData.height}
+          </p>
         </div>
       </div>
     </Modal>
   );
 }
-
-export default ImageModal;
