@@ -10,7 +10,7 @@ interface SearchBarProps {
 }
 
 export default function SearchBar({ onSubmit, onClearSearch, currentQueryActive }: SearchBarProps) {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState<string>("");
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);

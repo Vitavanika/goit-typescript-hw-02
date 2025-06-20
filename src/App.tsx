@@ -15,15 +15,13 @@ axios.defaults.baseURL = "https://api.unsplash.com";
 
 export default function App() {
   const [images, setImages] = useState<UnsplashImage[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-  const [selectedImage, setSelectedImage] = useState<UnsplashImage | null>(
-    null
-  );
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [query, setQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [selectedImage, setSelectedImage] = useState<UnsplashImage | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const fetchImages = async ( searchQuery: string, pageNum: number ): Promise<void> => {
     if (!searchQuery.trim()) {
