@@ -15,3 +15,13 @@ export interface UnsplashImage {
   height: number;
   description?: string;
 }
+
+export interface UnsplashResponse {
+  results: UnsplashImage[];
+  total_pages: number;
+}
+
+export interface FetchImagesProps {
+  searchQuery: string;
+  pageNum: number;
+}

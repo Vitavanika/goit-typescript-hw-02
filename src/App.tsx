@@ -8,9 +8,14 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
 import styles from "./App.module.css";
-import { UnsplashImage } from "./types";
+import { UnsplashImage, UnsplashResponse, FetchImagesProps } from "./types";
 
 const ACCESS_KEY: string = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
+if (!ACCESS_KEY) {
+  throw new Error(
+    "Missing Unsplash API access key. Please set VITE_UNSPLASH_ACCESS_KEY in your environment variables."
+  );
+}
 axios.defaults.baseURL = "https://api.unsplash.com";
 
 export default function App() {
@@ -23,7 +28,7 @@ export default function App() {
   const [selectedImage, setSelectedImage] = useState<UnsplashImage | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const fetchImages = async ( searchQuery: string, pageNum: number ): Promise<void> => {
+  const fetchImages = async ({ searchQuery, pageNum }: FetchImagesProps): Promise<void> => {
     if (!searchQuery.trim()) {
       setImages([]);
       setTotalPages(0);
@@ -32,7 +37,7 @@ export default function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.get("/search/photos", {
+      const response = await axios.get<UnsplashResponse>("/search/photos", {
         params: {
           query: searchQuery,
           page: pageNum,
@@ -70,7 +75,7 @@ export default function App() {
       return;
     }
     if (query) {
-      fetchImages(query, page);
+      fetchImages({ searchQuery: query, pageNum: page });
     }
   }, [query, page]);
 
